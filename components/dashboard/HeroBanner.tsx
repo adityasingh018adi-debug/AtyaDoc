@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { Zap, Shield, Clock, Users } from "lucide-react";
@@ -10,6 +11,42 @@ const HeroScene = dynamic(
   { ssr: false }
 );
 
+/**
+ * Decides whether the 3D scene is worth loading at all.
+ *
+ * The scene was hidden on phones with `hidden sm:block`, but CSS only hides it —
+ * React still mounted the component, so every mobile visitor downloaded the
+ * whole Three.js bundle for an ornament they never saw. Deciding in JS means the
+ * dynamic import never fires there.
+ *
+ * On desktop it waits for the browser to go idle, so decoration never competes
+ * with the page becoming usable, and it stays off entirely for anyone who has
+ * asked for reduced motion.
+ */
+function useDeferredScene() {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if (!window.matchMedia("(min-width: 640px)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    type IdleWindow = Window & {
+      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    const w = window as IdleWindow;
+
+    if (w.requestIdleCallback) {
+      const id = w.requestIdleCallback(() => setShow(true), { timeout: 2500 });
+      return () => w.cancelIdleCallback?.(id);
+    }
+    const id = window.setTimeout(() => setShow(true), 1200);
+    return () => window.clearTimeout(id);
+  }, []);
+
+  return show;
+}
+
 const pills = [
   { icon: Zap,    label: "AI Powered" },
   { icon: Shield, label: "Secure" },
@@ -18,6 +55,8 @@ const pills = [
 ];
 
 export function HeroBanner() {
+  const showScene = useDeferredScene();
+
   return (
     <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white"
       style={{ minHeight: 240 }}>
@@ -30,7 +69,7 @@ export function HeroBanner() {
       {/* 3D Scene — right side, DESKTOP ONLY
           Hidden on mobile because Three.js WebGL canvas bleeds outside CSS overflow bounds on Android */}
       <div className="absolute inset-y-0 right-0 w-1/2 pointer-events-none hidden sm:block">
-        <HeroScene />
+        {showScene && <HeroScene />}
       </div>
 
       {/* Mobile-only: decorative gradient orbs instead of 3D */}
