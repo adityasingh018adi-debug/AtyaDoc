@@ -68,6 +68,45 @@ jobs:
           test -f out/challan/index.html || { echo "::error::out/challan/index.html missing — pages are not being exported."; exit 1; }
           echo "Exported $(find out -type f | wc -l) files."
 
+      # Credentials are checked in their own step so a missing one is reported
+      # before apt spends time installing lftp, and — more usefully — so the
+      # failure says which of the several ways this goes wrong actually happened.
+      # "Secret not set" alone sends people back to a page where they can see
+      # they already set it.
+      - name: Check deployment credentials
+        env:
+          S_HOST: ${{ secrets.FTP_HOST }}
+          S_USER: ${{ secrets.FTP_USERNAME }}
+          S_PASS: ${{ secrets.FTP_PASSWORD }}
+          # Read the same names from the Variables tab too. Not to use them —
+          # a password must never be a variable, since those render in plain
+          # text in the UI and in logs — but to detect the commonest mistake,
+          # which is adding them on the wrong tab of the same settings page.
+          V_HOST: ${{ vars.FTP_HOST }}
+          V_USER: ${{ vars.FTP_USERNAME }}
+          V_PASS: ${{ vars.FTP_PASSWORD }}
+        run: |
+          set -uo pipefail
+          missing=0
+          for n in HOST USER PASS; do
+            eval "s=\${S_$n}"; eval "v=\${V_$n}"
+            label="FTP_$( [ "$n" = HOST ] && echo HOST || { [ "$n" = USER ] && echo USERNAME || echo PASSWORD; } )"
+            if [ -n "$s" ]; then
+              echo "  $label: set as a secret"
+            elif [ -n "$v" ]; then
+              echo "::error::$label is on the Variables tab, but it has to be a Secret. Delete the variable and re-add it under the Secrets tab (Settings -> Secrets and variables -> Actions -> Secrets -> New repository secret)."
+              missing=1
+            else
+              echo "::error::$label is not set on either tab."
+              missing=1
+            fi
+          done
+
+          if [ "$missing" -ne 0 ]; then
+            echo "::notice::Checklist: (1) the secrets belong to adityasingh018adi-debug/AtyaDoc, not another repo; (2) they are *Repository* secrets, not *Environment* secrets — this workflow declares no environment, so environment secrets are invisible to it; (3) names match exactly, they are case-sensitive."
+            exit 1
+          fi
+
       - name: Publish over FTP
         env:
           FTP_HOST: ${{ secrets.FTP_HOST }}
@@ -79,12 +118,6 @@ jobs:
           REMOTE_DIR: ${{ vars.FTP_REMOTE_DIR || 'public_html' }}
         run: |
           set -euo pipefail
-          for v in FTP_HOST FTP_USERNAME LFTP_PASSWORD; do
-            if [ -z "${!v}" ]; then
-              echo "::error::$v is not set. Add it under Settings → Secrets and variables → Actions."
-              exit 1
-            fi
-          done
 
           sudo apt-get update -qq && sudo apt-get install -y -qq lftp
 
