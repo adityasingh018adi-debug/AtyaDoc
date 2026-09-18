@@ -1,7 +1,21 @@
-name = "doclifyai"
+name = "atyadoc"
 compatibility_date = "2025-05-24"
 pages_build_output_dir = "out"
 
-[vars]
-NEXT_PUBLIC_APP_NAME = "DoclifyAI"
-NEXT_PUBLIC_CONVERT_API_URL = "https://convertai-api-production.up.railway.app"
+# Deliberately no [vars] block.
+#
+# NEXT_PUBLIC_* values are inlined into the bundle at build time, so whichever
+# system runs the build has to supply them. Committing them here meant the
+# conversion API URL lived in a file nobody re-read — which is how a dead
+# Railway endpoint survived the whole migration to Cloud Run and shipped in
+# builds long after the service behind it was gone.
+#
+# The values now come from the build environment:
+#   GitHub Actions  → Settings → Secrets and variables → Actions
+#                     variable  NEXT_PUBLIC_CONVERT_API_URL
+#                     secrets   NEXT_PUBLIC_CONVERT_API_KEY, NEXT_PUBLIC_OCR_API_KEY
+#   Cloudflare Pages → Settings → Environment variables (set the same names)
+#   Local dev        → .env.local, which is gitignored
+#
+# A missing API URL degrades rather than breaks: the challan, invoice and ledger
+# tools are entirely client-side. Only file conversion needs it.

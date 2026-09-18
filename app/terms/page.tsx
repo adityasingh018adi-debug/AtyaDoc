@@ -12,9 +12,9 @@ const sections = [
     bg: "bg-emerald-50 dark:bg-emerald-900/20",
     title: "Acceptance of Terms",
     content: [
-      "By accessing or using DoclifyAI (doclifyai.com), you agree to be bound by these Terms of Use.",
+      "By accessing or using AtyaDoc (atyadoc.in), you agree to be bound by these Terms of Use.",
       "If you do not agree to these terms, please discontinue use of the service immediately.",
-      "These terms apply to all visitors, users, and anyone who accesses DoclifyAI.",
+      "These terms apply to all visitors, users, and anyone who accesses AtyaDoc.",
     ],
   },
   {
@@ -23,7 +23,7 @@ const sections = [
     bg: "bg-blue-50 dark:bg-blue-900/20",
     title: "Description of Service",
     content: [
-      "DoclifyAI is a free, browser-based document utility offering: Word to PDF conversion, PDF to Word conversion, OCR (optical character recognition), AI Invoice & Challan generation, and a business ledger (Khatabook).",
+      "AtyaDoc is a free, browser-based document utility offering: Word to PDF conversion, PDF to Word conversion, OCR (optical character recognition), AI Invoice & Challan generation, and a business ledger (Khatabook).",
       "The service is provided free of charge on an as-is, as-available basis.",
       "We reserve the right to modify, suspend, or discontinue any feature at any time without notice.",
     ],
@@ -34,7 +34,7 @@ const sections = [
     bg: "bg-violet-50 dark:bg-violet-900/20",
     title: "Acceptable Use",
     content: [
-      "You may use DoclifyAI for lawful personal, educational, or business purposes.",
+      "You may use AtyaDoc for lawful personal, educational, or business purposes.",
       "You agree not to upload files containing malware, viruses, or malicious code.",
       "You agree not to attempt to reverse-engineer, scrape, or abuse the service's APIs or infrastructure.",
       "You are solely responsible for the content of files you upload and for ensuring you have the right to process them.",
@@ -47,7 +47,7 @@ const sections = [
     title: "Prohibited Activities",
     content: [
       "Processing files that contain illegal, harmful, or offensive content.",
-      "Using DoclifyAI to infringe on the intellectual property rights of others.",
+      "Using AtyaDoc to infringe on the intellectual property rights of others.",
       "Uploading confidential or classified government/military documents through third-party OCR services.",
       "Automated bulk processing that places excessive load on the service without prior permission.",
     ],
@@ -58,7 +58,7 @@ const sections = [
     bg: "bg-amber-50 dark:bg-amber-900/20",
     title: "Disclaimer of Warranties",
     content: [
-      "DoclifyAI is provided \"as is\" without warranties of any kind, express or implied.",
+      "AtyaDoc is provided \"as is\" without warranties of any kind, express or implied.",
       "We do not guarantee that conversions will be 100% perfect or that all formatting will be preserved.",
       "OCR accuracy depends on image quality and is not guaranteed. Always review extracted text before use.",
       "We are not responsible for data loss resulting from conversion errors or service downtime.",
@@ -70,8 +70,8 @@ const sections = [
     bg: "bg-slate-50 dark:bg-slate-800/40",
     title: "Limitation of Liability",
     content: [
-      "To the maximum extent permitted by law, DoclifyAI and its creators shall not be liable for any indirect, incidental, or consequential damages arising from your use of the service.",
-      "Our total liability to you for any claim related to DoclifyAI shall not exceed the amount you have paid us (which is zero, as the service is free).",
+      "To the maximum extent permitted by law, AtyaDoc and its creators shall not be liable for any indirect, incidental, or consequential damages arising from your use of the service.",
+      "Our total liability to you for any claim related to AtyaDoc shall not exceed the amount you have paid us (which is zero, as the service is free).",
       "Some jurisdictions do not allow limitation of liability — in such cases the above may not fully apply to you.",
     ],
   },
@@ -82,7 +82,7 @@ const sections = [
     title: "Changes to These Terms",
     content: [
       "We may update these Terms of Use at any time. Changes will be effective immediately upon posting.",
-      "Continued use of DoclifyAI after changes constitutes your acceptance of the revised terms.",
+      "Continued use of AtyaDoc after changes constitutes your acceptance of the revised terms.",
       "For questions or concerns about these terms, contact us at adityasingh018adi@gmail.com.",
     ],
   },
@@ -96,7 +96,7 @@ export default function TermsPage() {
         {/* Back */}
         <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="mb-8">
           <Link href="/" className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-violet-600 transition-colors font-medium">
-            <ArrowLeft size={15} /> Back to DoclifyAI
+            <ArrowLeft size={15} /> Back to AtyaDoc
           </Link>
         </motion.div>
 
@@ -115,7 +115,7 @@ export default function TermsPage() {
             <div className="flex items-start gap-3">
               <FileText size={17} className="text-blue-500 shrink-0 mt-0.5" />
               <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-                Please read these terms carefully before using DoclifyAI. They govern your use of the service and outline our mutual rights and responsibilities.
+                Please read these terms carefully before using AtyaDoc. They govern your use of the service and outline our mutual rights and responsibilities.
               </p>
             </div>
           </div>
@@ -146,7 +146,7 @@ export default function TermsPage() {
 
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
           className="text-xs text-center text-slate-400 mt-10 mb-8">
-          These terms are governed by applicable laws. By using DoclifyAI, you agree to resolve disputes amicably via email before seeking legal remedies.
+          These terms are governed by applicable laws. By using AtyaDoc, you agree to resolve disputes amicably via email before seeking legal remedies.
         </motion.p>
 
         <Footer />

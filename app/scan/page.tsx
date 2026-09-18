@@ -369,7 +369,7 @@ export default function ScanPage() {
               </div>
               <div>
                 <h1 className="text-2xl font-extrabold text-slate-800 dark:text-white flex items-center gap-2">
-                  Doclify Scan <span className="text-[10px] font-bold uppercase tracking-wide bg-gradient-to-r from-amber-400 to-orange-500 text-black px-2 py-0.5 rounded-full">Premium</span>
+                  AtyaDoc Scan <span className="text-[10px] font-bold uppercase tracking-wide bg-gradient-to-r from-amber-400 to-orange-500 text-black px-2 py-0.5 rounded-full">Premium</span>
                 </h1>
                 <p className="text-sm text-slate-500 dark:text-slate-400">Scan any document, detect its type, and convert it instantly</p>
               </div>

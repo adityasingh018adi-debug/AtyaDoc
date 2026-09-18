@@ -51,7 +51,7 @@ export default function UpgradePage() {
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-amber-200 dark:shadow-amber-900/30">
                 <Crown size={26} className="text-white" />
               </div>
-              <h1 className="text-2xl font-extrabold text-slate-800 dark:text-white">Upgrade to DoclifyAI Pro</h1>
+              <h1 className="text-2xl font-extrabold text-slate-800 dark:text-white">Upgrade to AtyaDoc Pro</h1>
               <p className="text-sm text-slate-500 dark:text-slate-400 mt-1.5">
                 Pro is coming soon. Leave your email and we&apos;ll notify you the moment it launches.
               </p>

@@ -18,7 +18,7 @@ export default function LoginPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     showToast(
-      "Accounts aren't live yet — DoclifyAI works fully without signing in. We'll let you know when this launches.",
+      "Accounts aren't live yet — AtyaDoc works fully without signing in. We'll let you know when this launches.",
       "info"
     );
   };
@@ -30,12 +30,12 @@ export default function LoginPage() {
 
         <div className="text-center mb-6">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/logo.svg" alt="DoclifyAI" className="w-14 h-14 rounded-2xl shadow-lg shadow-violet-200 dark:shadow-violet-900/40 mx-auto mb-4" />
+          <img src="/brand/logo.svg" alt="AtyaDoc" className="w-14 h-14 rounded-2xl shadow-lg shadow-violet-200 dark:shadow-violet-900/40 mx-auto mb-4" />
           <h1 className="text-2xl font-black text-slate-800 dark:text-white">
-            {mode === "signup" ? "Welcome to DoclifyAI" : "Welcome back"}
+            {mode === "signup" ? "Welcome to AtyaDoc" : "Welcome back"}
           </h1>
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-            {mode === "signup" ? "Sign up and start converting documents" : "Sign in to your DoclifyAI account"}
+            {mode === "signup" ? "Sign up and start converting documents" : "Sign in to your AtyaDoc account"}
           </p>
         </div>
 
@@ -43,7 +43,7 @@ export default function LoginPage() {
           <div className="flex items-start gap-2.5 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl px-3.5 py-3 mb-5">
             <Info size={15} className="text-blue-500 shrink-0 mt-0.5" />
             <p className="text-xs text-blue-700 dark:text-blue-300 leading-relaxed">
-              Accounts are coming soon. DoclifyAI already works fully without signing in — your data stays on this device. <Link href="/" className="font-semibold underline">Go use it now →</Link>
+              Accounts are coming soon. AtyaDoc already works fully without signing in — your data stays on this device. <Link href="/" className="font-semibold underline">Go use it now →</Link>
             </p>
           </div>
 
@@ -143,7 +143,7 @@ export default function LoginPage() {
         </div>
 
         <p className="text-center mt-5">
-          <Link href="/" className="text-xs text-slate-400 hover:text-violet-600 transition-colors">← Back to DoclifyAI</Link>
+          <Link href="/" className="text-xs text-slate-400 hover:text-violet-600 transition-colors">← Back to AtyaDoc</Link>
         </p>
       </motion.div>
     </div>

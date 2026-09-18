@@ -101,7 +101,7 @@ export default function AdminPage() {
                 </div>
                 <div>
                   <h1 className="text-2xl font-extrabold text-slate-800 dark:text-white">Activity Dashboard</h1>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">DoclifyAI — usage stats for this device</p>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">AtyaDoc — usage stats for this device</p>
                 </div>
               </div>
             </motion.div>

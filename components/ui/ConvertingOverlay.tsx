@@ -86,7 +86,7 @@ export function ConvertingOverlay({
           </div>
 
           <p className="text-xs text-white/40">
-            Powered by DoclifyAI · Please wait
+            Powered by AtyaDoc · Please wait
           </p>
         </div>
       </motion.div>

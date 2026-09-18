@@ -1,7 +1,7 @@
 {
-  "name": "doclifyai-api",
+  "name": "atyadoc-api",
   "version": "1.0.0",
-  "description": "LibreOffice conversion API for DoclifyAI",
+  "description": "LibreOffice conversion API for AtyaDoc",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"

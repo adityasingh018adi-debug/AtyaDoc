@@ -20,7 +20,7 @@ const LS_LAST_USED = "doclify_companies_last_used_v1";
 
 const DEFAULT_COMPANY: CompanyProfile = {
   id: "default",
-  name: "DoclifyAI Business",
+  name: "AtyaDoc Business",
   address: "Mumbai, Maharashtra",
 };
 

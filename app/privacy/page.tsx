@@ -12,7 +12,7 @@ const sections = [
     bg: "bg-violet-50 dark:bg-violet-900/20",
     title: "Information We Collect",
     content: [
-      "We do not require you to create an account or log in to use DoclifyAI.",
+      "We do not require you to create an account or log in to use AtyaDoc.",
       "When you upload a file for conversion or OCR processing, it is processed in memory and immediately discarded after the operation. We never store your files on our servers.",
       "We may collect anonymous usage analytics (page views, feature usage) to improve the product. No personally identifiable information is included.",
     ],
@@ -58,7 +58,7 @@ const sections = [
     content: [
       "All data in transit is encrypted via HTTPS/TLS.",
       "Uploaded files are processed in isolated, ephemeral environments and are never written to persistent storage.",
-      "We follow industry best practices to protect the infrastructure powering DoclifyAI.",
+      "We follow industry best practices to protect the infrastructure powering AtyaDoc.",
     ],
   },
   {
@@ -82,7 +82,7 @@ export default function PrivacyPage() {
         {/* Back */}
         <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="mb-8">
           <Link href="/" className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-violet-600 transition-colors font-medium">
-            <ArrowLeft size={15} /> Back to DoclifyAI
+            <ArrowLeft size={15} /> Back to AtyaDoc
           </Link>
         </motion.div>
 
@@ -101,7 +101,7 @@ export default function PrivacyPage() {
             <div className="flex items-start gap-3">
               <CheckCircle size={17} className="text-violet-500 shrink-0 mt-0.5" />
               <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-                <strong>Short version:</strong> DoclifyAI does not store your files. We don&apos;t require sign-up, we don&apos;t sell your data, and we never read your documents. Your privacy is our default.
+                <strong>Short version:</strong> AtyaDoc does not store your files. We don&apos;t require sign-up, we don&apos;t sell your data, and we never read your documents. Your privacy is our default.
               </p>
             </div>
           </div>
@@ -133,7 +133,7 @@ export default function PrivacyPage() {
         {/* Footer note */}
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
           className="text-xs text-center text-slate-400 mt-10 mb-8">
-          This policy may be updated from time to time. Continued use of DoclifyAI after changes constitutes acceptance of the updated policy.
+          This policy may be updated from time to time. Continued use of AtyaDoc after changes constitutes acceptance of the updated policy.
         </motion.p>
 
         <Footer />

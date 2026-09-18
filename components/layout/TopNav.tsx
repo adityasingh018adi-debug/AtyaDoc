@@ -28,7 +28,7 @@ export function TopNav({ onMenuClick }: TopNavProps) {
             className="hidden md:flex items-center gap-2 md:hidden"
           >
             <span className="text-lg font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
-              DoclifyAI
+              AtyaDoc
             </span>
           </Link>
         </div>

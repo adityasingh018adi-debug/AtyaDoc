@@ -22,7 +22,7 @@ export default function ContactPage() {
         {/* Back */}
         <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="mb-8">
           <Link href="/" className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-violet-600 transition-colors font-medium">
-            <ArrowLeft size={15} /> Back to DoclifyAI
+            <ArrowLeft size={15} /> Back to AtyaDoc
           </Link>
         </motion.div>
 
@@ -94,7 +94,7 @@ export default function ContactPage() {
             <p className="font-bold text-slate-800 dark:text-white text-sm mb-3">Frequently Asked Questions</p>
             <div className="space-y-3">
               {[
-                { q: "Is DoclifyAI completely free?", a: "Yes — all tools are free with no sign-up required." },
+                { q: "Is AtyaDoc completely free?", a: "Yes — all tools are free with no sign-up required." },
                 { q: "Are my files stored on your servers?", a: "No. Files are processed in memory and deleted immediately after conversion." },
                 { q: "What file size limits apply?", a: "Up to 50 MB for Word ↔ PDF conversions. Up to 5 MB for OCR scanning." },
                 { q: "Which languages does OCR support?", a: "English by default, with 25+ languages available via OCR.space." },

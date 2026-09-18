@@ -33,9 +33,9 @@ export function Footer() {
         <div className="col-span-2 sm:col-span-1">
           <div className="flex items-center gap-2.5 mb-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/logo.svg" alt="DoclifyAI" className="w-9 h-9 rounded-xl shadow-md" />
+            <img src="/brand/logo.svg" alt="AtyaDoc" className="w-9 h-9 rounded-xl shadow-md" />
             <span className="font-black bg-gradient-to-r from-violet-500 to-blue-500 bg-clip-text text-transparent text-lg">
-              DoclifyAI
+              AtyaDoc
             </span>
           </div>
           <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
@@ -43,7 +43,7 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-1.5 mt-3">
             <Sparkles size={11} className="text-amber-400" />
-            <span className="text-[10px] text-slate-400">Powered by DoclifyAI</span>
+            <span className="text-[10px] text-slate-400">Powered by AtyaDoc</span>
           </div>
         </div>
 
@@ -93,7 +93,7 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-2 pt-4 border-t border-slate-200 dark:border-slate-800">
         <p className="text-[11px] text-slate-400 flex items-center gap-1">
-          © {new Date().getFullYear()} DoclifyAI · Made with <Heart size={10} className="text-red-400 fill-red-400" /> in India
+          © {new Date().getFullYear()} AtyaDoc · Made with <Heart size={10} className="text-red-400 fill-red-400" /> in India
         </p>
         <p className="text-[11px] text-slate-400">
           Free · Fast · Secure · No login required

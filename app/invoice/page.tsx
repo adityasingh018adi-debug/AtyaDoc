@@ -126,7 +126,7 @@ export default function InvoicePage() {
       }
     }
 
-    // Prefill from a converted challan or Doclify Scan
+    // Prefill from a converted challan or AtyaDoc Scan
     const prefillRaw = localStorage.getItem(INVOICE_PREFILL_KEY);
     if (prefillRaw) {
       localStorage.removeItem(INVOICE_PREFILL_KEY);
@@ -342,7 +342,7 @@ export default function InvoicePage() {
         poNumber: form.poNumber || undefined, deliveryDate: form.deliveryDate || undefined,
         billTo: form.billTo, gstin: form.gstin,
         items: items.map(({ desc, hsn, qty, rate, gstPercent }) => ({ desc, hsn, qty, rate, gstPercent })),
-        fromName: selectedCompany?.name ?? "DoclifyAI Business",
+        fromName: selectedCompany?.name ?? "AtyaDoc Business",
         fromAddress: selectedCompany?.address ?? "Mumbai",
         fromGst: selectedCompany?.gst,
         logo: selectedCompany?.logo,
@@ -779,7 +779,7 @@ export default function InvoicePage() {
                 <div className="grid grid-cols-2 gap-4 mb-4 text-xs">
                   <div>
                     <p className="text-slate-400 mb-1">From:</p>
-                    <p className="font-semibold text-slate-700 dark:text-slate-200">{selectedCompany?.name ?? "DoclifyAI Business"}</p>
+                    <p className="font-semibold text-slate-700 dark:text-slate-200">{selectedCompany?.name ?? "AtyaDoc Business"}</p>
                     <p className="text-slate-500">{selectedCompany?.address ?? "Mumbai"}</p>
                   </div>
                   <div>
