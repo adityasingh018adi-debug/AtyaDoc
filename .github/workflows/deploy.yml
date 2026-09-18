@@ -1,0 +1,106 @@
+# Build the static site and publish it to Hostinger.
+#
+# The app is a Next.js static export (`output: "export"`), so "deploy" means
+# uploading the generated `out/` directory over FTP — there is no server to
+# restart and no build step running on the host.
+#
+# NEXT_PUBLIC_* values are inlined into the JavaScript at build time, not read at
+# runtime. They therefore have to be present in *this* job: setting them on
+# Hostinger afterwards would do nothing, and a missing one silently ships a build
+# where the feature that needs it fails with an empty URL.
+
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches: [master]
+  # Lets you re-publish the current master without pushing an empty commit,
+  # which is what you want after changing a secret or variable.
+  workflow_dispatch:
+
+# One deploy at a time. Two overlapping FTP mirrors into the same directory can
+# interleave files and leave the site in a state that matches neither build.
+concurrency:
+  group: deploy-hostinger
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      # `npm ci` rather than `npm install`: it installs exactly what the
+      # lockfile pins, so a deploy can't pick up a different dependency version
+      # than the one the change was tested against.
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static export
+        env:
+          NEXT_PUBLIC_CONVERT_API_URL: ${{ vars.NEXT_PUBLIC_CONVERT_API_URL }}
+          NEXT_PUBLIC_CONVERT_API_KEY: ${{ secrets.NEXT_PUBLIC_CONVERT_API_KEY }}
+          NEXT_PUBLIC_OCR_API_KEY: ${{ secrets.NEXT_PUBLIC_OCR_API_KEY }}
+        run: |
+          if [ -z "$NEXT_PUBLIC_CONVERT_API_URL" ]; then
+            # Not fatal — the challan, invoice and ledger tools are entirely
+            # client-side and work without it. Only the file conversions break,
+            # and they break quietly, so say so here rather than in a bug report.
+            echo "::warning::NEXT_PUBLIC_CONVERT_API_URL is not set. Document conversion will fail on the deployed site."
+          fi
+          npm run build
+
+      - name: Verify the export looks complete
+        run: |
+          test -f out/index.html || { echo "::error::out/index.html missing — the export did not produce a site."; exit 1; }
+          test -f out/challan/index.html || { echo "::error::out/challan/index.html missing — pages are not being exported."; exit 1; }
+          echo "Exported $(find out -type f | wc -l) files."
+
+      - name: Publish over FTP
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          # lftp reads this name specifically, via --env-password below. Passing
+          # the password on the command line instead would put it in the process
+          # list and in lftp's own logging.
+          LFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          REMOTE_DIR: ${{ vars.FTP_REMOTE_DIR || 'public_html' }}
+        run: |
+          set -euo pipefail
+          for v in FTP_HOST FTP_USERNAME LFTP_PASSWORD; do
+            if [ -z "${!v}" ]; then
+              echo "::error::$v is not set. Add it under Settings → Secrets and variables → Actions."
+              exit 1
+            fi
+          done
+
+          sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+          # `mirror --reverse` uploads; it is not a delete-and-replace. Files
+          # already on the host that this build doesn't produce are left alone,
+          # so anything else served out of the same directory survives a deploy.
+          # Add --delete to the mirror line if you want the remote directory to
+          # match `out/` exactly — but only once you're sure nothing else is
+          # served from there.
+          #
+          # The remote path is substituted by the shell before lftp runs, so the
+          # script below is passed with the directory already in it. Quoting the
+          # heredoc delimiter would ship lftp the literal string $REMOTE_DIR.
+          lftp -u "$FTP_USERNAME" --env-password "$FTP_HOST" <<LFTP
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          set net:max-retries 3
+          set net:timeout 20
+          mirror --reverse --verbose --parallel=4 out/ "$REMOTE_DIR"
+          bye
+          LFTP
+
+      - name: Summary
+        run: echo "Published to ${{ vars.FTP_REMOTE_DIR || 'public_html' }} on $(date -u +%FT%TZ)." >> "$GITHUB_STEP_SUMMARY"
