@@ -33,6 +33,7 @@ const navGroups = [
     sectionIcon: Building2,
     items: [
       { label: "All Invoices",     href: "/invoices",        gradient: "from-emerald-500 to-green-600", icon: ListChecks as LucideIcon },
+      { label: "All Challans",     href: "/challans",        gradient: "from-orange-500 to-amber-500",  icon: Clipboard  as LucideIcon },
       { label: "Customers",        href: "/customers",       gradient: "from-blue-500 to-cyan-600",      icon: Users      as LucideIcon },
       { label: "Product Library",  href: "/products",        gradient: "from-teal-500 to-emerald-600",   icon: Package    as LucideIcon },
       { label: "Company Profile",  href: "/company-profile", gradient: "from-indigo-500 to-blue-600",    icon: Building2  as LucideIcon },
