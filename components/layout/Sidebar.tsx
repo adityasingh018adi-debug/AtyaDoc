@@ -8,6 +8,7 @@ import {
   FileText, FileOutput, Receipt, Clipboard, ScanText, ScanLine,
   BookOpen, Clock, LayoutTemplate, Archive, ChevronRight,
   Sparkles, Sun, Moon, X, Briefcase, Building2, Users, Package, ListChecks,
+  HardDriveDownload,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
@@ -19,7 +20,7 @@ const navGroups = [
     section: "CONVERT & TOOLS",
     sectionIcon: Sparkles,
     items: [
-      { label: "Doclify Scan",       href: "/scan",         gradient: "from-indigo-500 to-purple-600", icon: ScanLine   as LucideIcon },
+      { label: "AtyaDoc Scan",       href: "/scan",         gradient: "from-indigo-500 to-purple-600", icon: ScanLine   as LucideIcon },
       { label: "Word to PDF",        href: "/word-to-pdf", gradient: "from-violet-500 to-blue-600",   icon: FileText   as LucideIcon, text: "W" },
       { label: "PDF to Word",        href: "/pdf-to-word", gradient: "from-red-500 to-rose-500",      icon: FileOutput as LucideIcon },
       { label: "AI Invoice Maker",   href: "/invoice",     gradient: "from-emerald-500 to-green-600", icon: Receipt    as LucideIcon },
@@ -46,6 +47,7 @@ const navGroups = [
       { label: "Recent Files",    href: "/recent",    gradient: "from-blue-500 to-cyan-500",     icon: Clock          as LucideIcon },
       { label: "Templates",       href: "/templates", gradient: "from-indigo-500 to-purple-600", icon: LayoutTemplate as LucideIcon },
       { label: "Saved Documents", href: "/saved",     gradient: "from-rose-500 to-pink-600",     icon: Archive        as LucideIcon },
+      { label: "Backup & Restore", href: "/backup",   gradient: "from-sky-500 to-blue-600",      icon: HardDriveDownload as LucideIcon },
     ],
   },
 ];
@@ -78,11 +80,11 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
             <Link href="/" onClick={onClose} className="flex items-center gap-3 min-w-0">
               <div className="relative shrink-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/brand/logo.svg" alt="DoclifyAI" className="w-12 h-12 rounded-2xl shadow-lg shadow-violet-900/40" />
+                <img src="/brand/logo.svg" alt="AtyaDoc" className="w-12 h-12 rounded-2xl shadow-lg shadow-violet-900/40" />
               </div>
               <div className="min-w-0">
                 <span className="text-xl font-black bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                  DoclifyAI
+                  AtyaDoc
                 </span>
                 <p className="text-[11px] text-slate-500 leading-none mt-0.5 truncate">
                   Smart Tools, Simple Solutions
